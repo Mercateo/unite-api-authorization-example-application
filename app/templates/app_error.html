@@ -1,0 +1,17 @@
+{% extends "app_base.html" %}
+
+{% block body %}
+
+    <h3>Unite API Authorization Error</h3>
+
+    <table>
+        <tr>
+            <th>Error</th>
+            <td>{{ error }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ error_description }}</td>
+        </tr>
+    </table>
+{% endblock %}

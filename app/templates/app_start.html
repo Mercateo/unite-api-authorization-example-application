@@ -1,0 +1,48 @@
+{% extends "app_base.html" %}
+
+{% block body %}
+
+    <h3>Unite API Authorization</h3>
+    <p>Authorize API access and retrieve an Access Token by clicking the button below</p>
+    <p>Before using this flow you must register an account <a href="{{ user_registration_uri }}"> here</a> which will be used for authorizing API access.</p>
+    <br>
+    <p>In order to retrieve a company token you must first create a company using a token with the tenant audience <code>{{ tenant_audience }}</code>.</p>
+    <p>This tenant token can then also be used to retrieve the company ID (a UUID) which is needed to retrieve a comany token.</p>
+    <p>To retrieve a company token this ID should be added below and the audience should be changed to <code>{{ company_audience }}</code>.</p>
+    <br>
+    <p>
+        <form action="{{ action_url }}" method="get">
+            <input name="redirect_uri" value="{{ redirect_uri }}" type="hidden"/>
+            <input name="client_id" value="{{ client_id }}" type="hidden"/>
+    <p>
+        <label for="scope"> Token Scope: </label>
+        <input name="scope" value="{{ scope }}"/>
+    </p>
+    <p>
+        <label for="state"> Token State: </label>
+        <input name="state" value="{{ state }}"/>
+    </p>
+    <p>
+        <label for="audience"> Token Audience: </label>
+        <select name="audience" size="1">
+            {% for audience in audiences %}
+                <option {% if audience == tenant_audience %} selected="selected"{% endif %} >{{ audience }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <p>
+        <label for="company_id"> Company ID: </label>
+        <input name="company_id" value="{{ company_id }}"/>
+    </p>
+    <p>
+        <label/>
+        <button class="e2e-button-activate-api">Authorize API</button>
+    </p>
+    </form>
+    </p>
+
+    <br/>
+    <br/>
+
+     <p>Having problems in the process? Try <a href="https://{{ token_request_uri }}/logout?returnTo={{ redirect_uri }}&client_id={{ client_id }}">logging out</a>.</p>
+{% endblock %}

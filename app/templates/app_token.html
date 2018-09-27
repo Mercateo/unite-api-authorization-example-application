@@ -1,0 +1,76 @@
+{% extends "app_base.html" %}
+
+{% block body %}
+    <style type="text/css">
+
+    </style><h2>Data for Refresh Token Grant Flow</h2>
+    <p>This is the data received by authorizing API access. Only the Refresh Token needs to be saved for further requests.</p>
+    <br>
+    <table border="1px">
+        <tr>
+            <td> Authorization Code: </td>
+            <td> {{ authorization_code }} </td>
+        </tr>
+        <tr>
+            <td> Token State: </td>
+            <td> {{ state }} </td>
+        </tr>
+        <tr>
+            <td> Refresh Token: </td>
+            <td> {{ refresh_token }} </td>
+        </tr>
+    </table>
+
+    <h2>Retrieve Access Token Request</h2>
+    <p>Using the Refresh Token Grant Flow we can retrieve an access token for using the Unite APIs.</p>
+    <br>
+    <table>
+        <tr>
+            <td class="tlabel"> Target URI: </td>
+            <td>
+                <pre>{{ token_request_uri }}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td class="tlabel"> Payload: </td>
+            <td>
+                <pre>{{ token_request }}</pre>
+            </td>
+        </tr>
+    </table>
+
+    <h2>Response Payload</h2>
+    <p>The Access Token returned by the endpoint which contains a number of IDs and the requested audience.</p>
+    <br>
+    <table>
+        <tr>
+            <td class="tlabel"> Raw JWT Token: </td>
+            <td>
+                <pre class="token">{{ raw_token }}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td class="tlabel"> Decoded JWT Token: </td>
+            <td>
+                <pre>{{ jwt }}</pre>
+            </td>
+        </tr>
+        <tr>
+            <td class="tlabel"> Refresh Token: </td>
+            <td valign="top">
+                <pre>{{ refresh_token }}</pre>
+            </td>
+        </tr>
+    </table>
+
+    {% if refresh_token %}
+        <h3> Refresh Token Form </h3>
+        <p>Retrieve a new Access Token by means of the Refresh Token Grant Flow by clicking the button below</p>
+        <br>
+        <form>
+            <input name="refresh_token" value="{{ refresh_token }}" type="hidden"/>
+            <p><label>Token Scope:</label> <input value="{{ scope }}" name="scope"></p>
+            <button>Refresh Access Token</button>
+        </form>
+    {% endif %}
+{% endblock %}

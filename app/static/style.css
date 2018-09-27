@@ -1,0 +1,25 @@
+form {
+    display: table;
+}
+
+p {
+    display: table-row;
+}
+
+label {
+    display: table-cell;
+}
+
+input {
+    display: table-cell;
+    width: 400px;
+}
+
+button {
+    display: table-cell;
+}
+
+td.tlabel {
+    align: right;
+    valign: top;
+}
